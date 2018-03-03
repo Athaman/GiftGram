@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {ListGroup} from 'react-bootstrap';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 import ProductListItem from './ProductListItem';
@@ -8,6 +9,7 @@ function getProductListItem(product){
     <ProductListItem key={product.id} product={product} />
   )
 }
+
 class Products extends Component {
   constructor(props){
     super(props);
@@ -39,9 +41,15 @@ class Products extends Component {
   }
 
   render() {
+    let productListItems;
+    if(this.state.products){
+      productListItems = this.state.products.map(product => getProductListItem(product))
+    }
     return (
       <div>
-
+        <ListGroup>
+          {productListItems}
+        </ListGroup>
       </div>
     );
   }

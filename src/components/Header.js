@@ -6,9 +6,7 @@ class Header extends Component {
     return (
       <Navbar>
         <Navbar.Header>
-          <Navbar.Brand>
-            Gift Gram
-          </Navbar.Brand>
+          <img src="img/logo.jpg" className="navbar-left" />
         </Navbar.Header>
       </Navbar>
     );
