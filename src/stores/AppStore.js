@@ -5,9 +5,14 @@ import {EventEmitter} from 'events';
 const CHANGE_EVENT = 'change';
 
 let _products = [];
+let _shops = [];
 
 function setProducts(products){
   _products = products;
+}
+
+function setShops(shops){
+  _shops = shops;
 }
 
 class AppStoreClass extends EventEmitter {
@@ -20,11 +25,15 @@ class AppStoreClass extends EventEmitter {
   }
 
   removeChangeListener(callback){
-    this.removeLisener(CHANGE_EVENT, callback);
+    this.removeListener(CHANGE_EVENT, callback);
   }
 
   getProducts() {
     return _products;
+  }
+
+  getShops() {
+    return _shops;
   }
 }
 
@@ -34,6 +43,10 @@ AppStore.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case AppConstants.RECEIVE_PRODUCTS:
       setProducts(action.products);
+      AppStore.emitChange()
+      break;
+    case AppConstants.RECEIVE_SHOPS:
+      setShops(action.shops);
       AppStore.emitChange()
       break;
   }

@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import {ListGroup} from 'react-bootstrap';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
-import ProductListItem from './ProductListItem';
+import ShopListItem from './ShopListItem';
 
-function getProductListItem(product){
+function getShopListItem(shop){
   return (
-    <ProductListItem key={product.productId} product={product} />
+    <ShopListItem key={shop.shopId} shop={shop} />
   )
 }
 
-class Products extends Component {
+class Shops extends Component {
   constructor(props){
     super(props);
     this.state = {
-      products: []
+      shops: []
     }
 
     this.onChange = this.onChange.bind(this);
@@ -25,7 +25,7 @@ class Products extends Component {
   }
 
   componentDidMount() {
-    AppActions.receiveProducts();
+    AppActions.receiveShops();
   }
 
   componentWillUnmount(){
@@ -34,25 +34,25 @@ class Products extends Component {
 
   onChange(){
     this.setState({
-      products: AppStore.getProducts()
+      shops: AppStore.getShops()
     }, function() {
       console.log(this.state);
     })
   }
 
   render() {
-    let productListItems;
-    if(this.state.products){
-      productListItems = this.state.products.map(product => getProductListItem(product))
+    let shopListItems;
+    if(this.state.shops){
+      shopListItems = this.state.shops.map(shop => getShopListItem(shop))
     }
     return (
       <div>
         <ListGroup>
-          {productListItems}
+          {shopListItems}
         </ListGroup>
       </div>
     );
   }
 }
 
-export default Products;
+export default Shops;

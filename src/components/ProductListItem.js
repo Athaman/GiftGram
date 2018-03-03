@@ -6,8 +6,9 @@ class ProductListItem extends Component {
     const {product} = this.props;
     return (
       <Well>
-        <h4>{product.name}</h4>
+        <h4>{product.productName}</h4>
         <ListGroup>
+          <ListGroupItem><img src={product.productImage}/></ListGroupItem>
           <ListGroupItem>Description: {product.description}</ListGroupItem>
         </ListGroup>
       </Well>
