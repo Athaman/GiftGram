@@ -6,8 +6,12 @@ const CHANGE_EVENT = 'change';
 
 let _products = [];
 
+function setProducts(products){
+  _products = products;
+}
+
 class AppStoreClass extends EventEmitter {
-  emitChagne() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
   }
 
@@ -23,3 +27,16 @@ class AppStoreClass extends EventEmitter {
     return _products;
   }
 }
+
+const AppStore = new AppStoreClass();
+
+AppStore.dispatchToken = AppDispatcher.register(action => {
+  switch (action.actionType) {
+    case AppConstants.RECEIVE_PRODUCTS:
+      setProducts(action.products);
+      AppStore.emitChange()
+      break;
+  }
+});
+
+export default AppStore;
