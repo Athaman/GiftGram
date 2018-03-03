@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Shops from './components/Shops';
 import Products from './components/Products';
+import Landing from './components/Landing';
 import Auth0Lock from 'auth0-lock';
 import './App.css';
 
@@ -32,7 +33,10 @@ class App extends Component {
         }
 
         this.setData(authResult.idToken, profile);
-      })
+      });
+
+      this.lock.hide();
+
     });
 
     this.getData();
@@ -67,7 +71,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Products />
+        <Landing />
       </div>
     );
   }
