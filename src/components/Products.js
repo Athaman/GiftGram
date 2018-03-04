@@ -6,7 +6,7 @@ import ProductListItem from './ProductListItem';
 
 function getProductListItem(product){
   return (
-    <ProductListItem key={product.productId} product={product} />
+    <ProductListItem key={product.productId} product={product}/>
   )
 }
 

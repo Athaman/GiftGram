@@ -3,8 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Shops from './components/Shops';
 import Products from './components/Products';
+import ItemDetails from './components/ItemDetails';
 import Landing from './components/Landing';
+import Payment from './components/Payment';
+import DetailsForm from './components/DetailsForm';
 import Auth0Lock from 'auth0-lock';
+import AppStore from './stores/AppStore';
 import './App.css';
 
 class App extends Component {
@@ -12,8 +16,12 @@ class App extends Component {
     super();
     this.state = {
       idToken: '',
-      profile: {}
+      profile: {},
+      page: 'landing'
     }
+
+    this.changePage = this.changePage.bind(this);
+
   }
 
   static defaultProps = {
@@ -39,7 +47,14 @@ class App extends Component {
 
     });
 
+    AppStore.addPageChangeListener(this.changePage);
+
     this.getData();
+  }
+
+  changePage(){
+    let page = AppStore.getPage();
+    this.setState({page: page});
   }
 
   // set profile and token data
@@ -58,20 +73,27 @@ class App extends Component {
       this.setState({
         idToken: localStorage.getItem('idToken'),
         profile: JSON.parse(localStorage.getItem('profile'))
-      }, () => {
-        console.log(this.state);
       })
     }
   }
   render() {
-    let page;
+    console.log(this.state);
+    let pages = {
+      landing: <Landing />,
+      payment: <Payment />,
+      detailForm: <DetailsForm />,
+      itemDetails: <ItemDetails />,
+      products: <Products />,
+      shops: <Shops />
+    };
+    let page = pages[this.state.page];
     if(!this.state.idToken){
       this.lock.show();
     }
     return (
       <div className="App">
         <Header />
-        <Landing />
+        {page}
       </div>
     );
   }

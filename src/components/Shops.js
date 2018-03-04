@@ -6,7 +6,7 @@ import ShopListItem from './ShopListItem';
 
 function getShopListItem(shop){
   return (
-    <ShopListItem key={shop.shopId} shop={shop} />
+    <ShopListItem key={shop.shopId} shop={shop}/>
   )
 }
 

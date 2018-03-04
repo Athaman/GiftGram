@@ -45,5 +45,12 @@ export default {
       actionType: AppConstants.RECEIVE_SHOPS,
       shops: ShopsAPI.getShops()
     });
+  },
+
+  changePage: (page) => {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.PAGE_CHANGE_EVENT,
+      page: page
+    });
   }
 }
